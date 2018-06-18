@@ -11,6 +11,7 @@
 		621B409520D4098300CBC5EC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 621B409420D4098300CBC5EC /* ViewController.swift */; };
 		621B409720D4098300CBC5EC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 621B409620D4098300CBC5EC /* Assets.xcassets */; };
 		621B409A20D4098300CBC5EC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 621B409820D4098300CBC5EC /* Main.storyboard */; };
+		621B40A320D40B0B00CBC5EC /* toobViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 621B40A220D40B0B00CBC5EC /* toobViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,6 +22,7 @@
 		621B409920D4098300CBC5EC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		621B409B20D4098300CBC5EC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		621B409C20D4098300CBC5EC /* toob.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = toob.entitlements; sourceTree = "<group>"; };
+		621B40A220D40B0B00CBC5EC /* toobViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = toobViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +59,7 @@
 				621B409420D4098300CBC5EC /* ViewController.swift */,
 				621B409620D4098300CBC5EC /* Assets.xcassets */,
 				621B409820D4098300CBC5EC /* Main.storyboard */,
+				621B40A220D40B0B00CBC5EC /* toobViewController.swift */,
 				621B409B20D4098300CBC5EC /* Info.plist */,
 				621B409C20D4098300CBC5EC /* toob.entitlements */,
 			);
@@ -135,6 +138,7 @@
 			files = (
 				621B409520D4098300CBC5EC /* ViewController.swift in Sources */,
 				621B409320D4098300CBC5EC /* AppDelegate.swift in Sources */,
+				621B40A320D40B0B00CBC5EC /* toobViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -198,7 +202,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
@@ -247,7 +251,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
