@@ -12,6 +12,9 @@
 		621B409720D4098300CBC5EC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 621B409620D4098300CBC5EC /* Assets.xcassets */; };
 		621B409A20D4098300CBC5EC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 621B409820D4098300CBC5EC /* Main.storyboard */; };
 		621B40A320D40B0B00CBC5EC /* toobViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 621B40A220D40B0B00CBC5EC /* toobViewController.swift */; };
+		625CDF8F20D87A3A00571914 /* toobView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625CDF8E20D87A3A00571914 /* toobView.swift */; };
+		625CDF9120D87B1D00571914 /* toobWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625CDF9020D87B1D00571914 /* toobWebView.swift */; };
+		625CDF9520D9001B00571914 /* keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 625CDF9420D9001B00571914 /* keys.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +26,9 @@
 		621B409B20D4098300CBC5EC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		621B409C20D4098300CBC5EC /* toob.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = toob.entitlements; sourceTree = "<group>"; };
 		621B40A220D40B0B00CBC5EC /* toobViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = toobViewController.swift; sourceTree = "<group>"; };
+		625CDF8E20D87A3A00571914 /* toobView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = toobView.swift; sourceTree = "<group>"; };
+		625CDF9020D87B1D00571914 /* toobWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = toobWebView.swift; sourceTree = "<group>"; };
+		625CDF9420D9001B00571914 /* keys.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = keys.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,11 +61,14 @@
 		621B409120D4098300CBC5EC /* toob */ = {
 			isa = PBXGroup;
 			children = (
+				625CDF9420D9001B00571914 /* keys.plist */,
 				621B409220D4098300CBC5EC /* AppDelegate.swift */,
 				621B409420D4098300CBC5EC /* ViewController.swift */,
 				621B409620D4098300CBC5EC /* Assets.xcassets */,
 				621B409820D4098300CBC5EC /* Main.storyboard */,
 				621B40A220D40B0B00CBC5EC /* toobViewController.swift */,
+				625CDF8E20D87A3A00571914 /* toobView.swift */,
+				625CDF9020D87B1D00571914 /* toobWebView.swift */,
 				621B409B20D4098300CBC5EC /* Info.plist */,
 				621B409C20D4098300CBC5EC /* toob.entitlements */,
 			);
@@ -126,6 +135,7 @@
 			files = (
 				621B409720D4098300CBC5EC /* Assets.xcassets in Resources */,
 				621B409A20D4098300CBC5EC /* Main.storyboard in Resources */,
+				625CDF9520D9001B00571914 /* keys.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -136,8 +146,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				625CDF8F20D87A3A00571914 /* toobView.swift in Sources */,
 				621B409520D4098300CBC5EC /* ViewController.swift in Sources */,
 				621B409320D4098300CBC5EC /* AppDelegate.swift in Sources */,
+				625CDF9120D87B1D00571914 /* toobWebView.swift in Sources */,
 				621B40A320D40B0B00CBC5EC /* toobViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -307,6 +319,7 @@
 				621B40A120D4098300CBC5EC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -16,13 +16,19 @@ class toobViewController: NSViewController, WKUIDelegate  {
     
     
     
-    var webView: WKWebView!
+    var webView: toobWebView!
     var button: NSButton!
+    var keys: NSDictionary!
     
     override func loadView() {
-        view = NSView()
+        view = toobView()
+        NSLayoutConstraint.activate([
+           view.widthAnchor.constraint(equalToConstant: 224),
+            view.heightAnchor.constraint(equalToConstant: 158),
+            ])
+        
        let webConfiguration = WKWebViewConfiguration()
-        webView = WKWebView(frame: .zero, configuration: webConfiguration)
+        webView = toobWebView(frame: .zero, configuration: webConfiguration)
         webView.uiDelegate = self
         
         
@@ -30,8 +36,8 @@ class toobViewController: NSViewController, WKUIDelegate  {
         
         webView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            webView.widthAnchor.constraint(equalTo: self.view.widthAnchor),
-            webView.heightAnchor.constraint(equalTo: self.view.heightAnchor ,multiplier: 0.79),
+            webView.widthAnchor.constraint(equalToConstant: 224),
+            webView.heightAnchor.constraint(equalToConstant: 126),
             webView.topAnchor.constraint(equalTo: self.view.topAnchor),
             ])
         
@@ -46,25 +52,33 @@ class toobViewController: NSViewController, WKUIDelegate  {
         button.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             button.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
-            button.heightAnchor.constraint(equalTo: self.view.heightAnchor ,multiplier: 0.21),
+            button.heightAnchor.constraint(equalToConstant: 32),
            button.widthAnchor.constraint(equalTo: self.view.widthAnchor),
            // button.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
            // button.centerYAnchor.constraint(equalTo: self.view.centerYAnchor),
             ])
         
         
-        button.title = "Quit Toob"
-        print(button.font = NSFont(name: ".AppleSystemUIFont", size:24))
+        button.attributedTitle = NSMutableAttributedString(string: " Quit Toob", attributes: [NSAttributedStringKey.foregroundColor: NSColor.black, NSAttributedStringKey.font: NSFont.systemFont(ofSize: 14)])
         
+        
+        button.showsBorderOnlyWhileMouseInside = true
     }
     
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let myURL = URL(string:"https://www.youtube-nocookie.com/embed/-FlxM_0S2lA?rel=0&controls=0&showinfo=0")
-        let myRequest = URLRequest(url: myURL!)
-        webView.load(myRequest)
+        
+        if let path = Bundle.main.path(forResource: "Keys", ofType: "plist") {
+            keys = NSDictionary(contentsOfFile: path)
+        }
+        
+        print(keys)
+        
+        let myURL = URL(string:"https://www.youtube-nocookie.com/embed/-FlxM_0S2lA?rel=0&controls=0&modestbranding=1&iv_load_policy=3")
+      //  let myRequest = URLRequest(url: myURL!)
+      //  webView.load(myRequest)
         
         
         
@@ -78,23 +92,9 @@ class toobViewController: NSViewController, WKUIDelegate  {
     
 }
 
-extension toobViewController {
-    // MARK: Storyboard instantiation
-    static func freshController() -> toobViewController {
-        //1.
-        let storyboard = NSStoryboard(name: NSStoryboard.Name(rawValue: "Main"), bundle: nil)
-        //2.
-        let identifier = NSStoryboard.SceneIdentifier(rawValue: "toobViewController")
-        //3.
-        guard let viewcontroller = storyboard.instantiateController(withIdentifier: identifier) as? toobViewController else {
-            fatalError("Can't find find toobViewController")
-        }
-        viewcontroller.preferredContentSize = CGSize(width: 256, height: 180)
-        return viewcontroller
-    }
     
     
-}
+
 
 
 
