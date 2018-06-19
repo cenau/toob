@@ -13,12 +13,12 @@ import WebKit
 import AppKit
 
 class toobViewController: NSViewController, WKUIDelegate  {
-    
-    
-    
+        
     var webView: toobWebView!
     var button: NSButton!
     var keys: NSDictionary!
+    
+    
     
     override func loadView() {
         view = toobView()
@@ -44,6 +44,8 @@ class toobViewController: NSViewController, WKUIDelegate  {
        button = NSButton()
         
         
+        button.wantsLayer = true
+        
         button.frame = .zero
         self.view.addSubview(button)
         
@@ -61,30 +63,100 @@ class toobViewController: NSViewController, WKUIDelegate  {
         
         button.attributedTitle = NSMutableAttributedString(string: " Quit Toob", attributes: [NSAttributedStringKey.foregroundColor: NSColor.black, NSAttributedStringKey.font: NSFont.systemFont(ofSize: 14)])
         
+        button.isBordered = false
         
-        button.showsBorderOnlyWhileMouseInside = true
+        
     }
     
+    
+    override func mouseEntered(with event: NSEvent) {
+        
+        button.layer?.backgroundColor = NSColor.lightGray.cgColor
+    }
+    
+    override func mouseExited(with event: NSEvent) {
+        
+        button.layer?.backgroundColor = NSColor.white.cgColor
+    }
+    
+    override func viewWillAppear() {
+        self.view.layer?.backgroundColor = NSColor.white.cgColor
+        
+    }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let path = Bundle.main.path(forResource: "Keys", ofType: "plist") {
+        self.view.wantsLayer = true
+        
+        if let path = Bundle.main.path(forResource: "keys", ofType: "plist") {
             keys = NSDictionary(contentsOfFile: path)
         }
         
-        print(keys)
         
-        let myURL = URL(string:"https://www.youtube-nocookie.com/embed/-FlxM_0S2lA?rel=0&controls=0&modestbranding=1&iv_load_policy=3")
-      //  let myRequest = URLRequest(url: myURL!)
-      //  webView.load(myRequest)
+        var vidId: String!
+        
+        let urlString = "https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=UCSJ4gkVC6NrvII8umztf0Ow&eventType=live&maxResults=1&type=video&key=" + (keys.object(forKey: "youtubeApiKey") as? String)!
+        
+        guard let url = URL(string: urlString) else { return }
+        
+        URLSession.shared.dataTask(with: url) { (data, response, error) in
+            if error != nil {
+                print(error!.localizedDescription)
+            }
+            
+            guard let data = data else { return }
+            
+            do {
+                if let json = try JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.mutableContainers) as? [String:Any] {
+                    
+                    if let items = json["items"] as? [[String:Any]] {
+                        vidId = ((items[0] as NSDictionary).object(forKey: "id") as! NSDictionary).object(forKey: "videoId") as! String
+                        
+                        
+                    }
+                }
+                
+                
+                DispatchQueue.main.async {
+                    self.loadVideoWith(videoId:vidId)
+                }
+                
+            } catch let jsonError {
+                print(jsonError)
+            }
+            
+            
+            }.resume()
+        
+        
+        
+        
         
         
         
     }
     
+    override func viewDidLayout() {
+        
+        let area = NSTrackingArea.init(rect: button.frame,
+                                       options: [.mouseEnteredAndExited, .activeAlways],
+                                       owner: self,
+                                       userInfo: nil)
+        
+        print(area)
+        button.addTrackingArea(area)
+        
+    }
     
+    
+    func loadVideoWith(videoId: String){
+        let theURL = URL(string:"https://www.youtube-nocookie.com/embed/\(videoId)?rel=0&controls=0&modestbranding=1&iv_load_policy=3")
+        print(theURL)
+        let myRequest = URLRequest(url: theURL!)
+        self.webView.load(myRequest)
+    }
     
     @objc func quit(){
         NSApplication.shared.terminate(self)
@@ -93,7 +165,7 @@ class toobViewController: NSViewController, WKUIDelegate  {
 }
 
     
-    
+
 
 
 
