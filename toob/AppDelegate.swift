@@ -17,7 +17,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     var detector: Any?
     
-    
+    var debug: Bool!
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         if let button = statusItem.button {
@@ -30,9 +30,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         detector = NSEvent.addGlobalMonitorForEvents(matching:[NSEvent.EventTypeMask.leftMouseDown, NSEvent.EventTypeMask.rightMouseDown], handler: { [weak self] event in
             self?.closePopover(sender: event)
         })
+        let version = Bundle.main.infoDictionary!["CFBundleShortVersionString"]!
+        let build = Bundle.main.infoDictionary!["CFBundleVersion"]!
         
-       
-        
+        print("toob v\(version) \(build)")
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
@@ -45,15 +46,26 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     
     @objc func togglePopover(_ sender: Any?) {
+        debug = false
+        let event = NSApp.currentEvent!
+        if (event.modifierFlags.contains(.option) ) //alt is pressed
+        {
+            debug = true
+        }
+        
         if popover.isShown {
             closePopover(sender: sender)
         } else {
-            showPopover(sender: sender)
+            showPopover(sender: sender, debug:debug)
             
         }
+            
     }
     
-    func showPopover(sender: Any?) {
+    
+    func showPopover(sender: Any?, debug:Bool) {
+        
+        
         if let button = statusItem.button {
             popover.show(relativeTo: button.bounds, of: button, preferredEdge: NSRectEdge.minY)
         }

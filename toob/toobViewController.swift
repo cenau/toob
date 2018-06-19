@@ -12,13 +12,14 @@ import AVFoundation
 import WebKit
 import AppKit
 
-class toobViewController: NSViewController, WKUIDelegate  {
-        
+class toobViewController: NSViewController, WKUIDelegate,WKScriptMessageHandler  {
+    
+    let delegate = NSApplication.shared.delegate as! AppDelegate
     var webView: toobWebView!
     var button: NSButton!
     var keys: NSDictionary!
-    
-    
+    var latest: String!
+    var connectionError: String!
     
     override func loadView() {
         view = toobView()
@@ -27,12 +28,25 @@ class toobViewController: NSViewController, WKUIDelegate  {
             view.heightAnchor.constraint(equalToConstant: 158),
             ])
         
+        let userScript = WKUserScript(
+            source: "mobileHeader()",
+            injectionTime: WKUserScriptInjectionTime.atDocumentEnd,
+            forMainFrameOnly: true
+        )
+        
        let webConfiguration = WKWebViewConfiguration()
+        let contentController = WKUserContentController()
+         contentController.addUserScript(userScript)
+        contentController.add(self, name: "retryAction")
+        webConfiguration.userContentController = contentController
+        
         webView = toobWebView(frame: .zero, configuration: webConfiguration)
         webView.uiDelegate = self
         
         
         self.view.addSubview(webView)
+        
+        
         
         webView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -66,6 +80,8 @@ class toobViewController: NSViewController, WKUIDelegate  {
         button.isBordered = false
         
         
+        
+        
     }
     
     
@@ -81,6 +97,14 @@ class toobViewController: NSViewController, WKUIDelegate  {
     
     override func viewWillAppear() {
         self.view.layer?.backgroundColor = NSColor.white.cgColor
+        if(delegate.debug) {
+            let version = Bundle.main.infoDictionary!["CFBundleShortVersionString"]!
+            let build = Bundle.main.infoDictionary!["CFBundleVersion"]!
+             button.attributedTitle = NSMutableAttributedString(string: " Quit Toob v\(version) \(build)", attributes: [NSAttributedStringKey.foregroundColor: NSColor.black, NSAttributedStringKey.font: NSFont.systemFont(ofSize: 14)])
+        } else {
+            
+        button.attributedTitle = NSMutableAttributedString(string: " Quit Toob", attributes: [NSAttributedStringKey.foregroundColor: NSColor.black, NSAttributedStringKey.font: NSFont.systemFont(ofSize: 14)])
+        }
         
     }
     
@@ -90,6 +114,22 @@ class toobViewController: NSViewController, WKUIDelegate  {
         
         self.view.wantsLayer = true
         
+        getLatestLiveVid()
+        
+    }
+    
+    override func viewDidLayout() {
+        
+        let area = NSTrackingArea.init(rect: button.frame,
+                                       options: [.mouseEnteredAndExited, .activeAlways],
+                                       owner: self,
+                                       userInfo: nil)
+        
+        button.addTrackingArea(area)
+        
+    }
+    
+    func getLatestLiveVid(){
         if let path = Bundle.main.path(forResource: "keys", ofType: "plist") {
             keys = NSDictionary(contentsOfFile: path)
         }
@@ -103,7 +143,10 @@ class toobViewController: NSViewController, WKUIDelegate  {
         
         URLSession.shared.dataTask(with: url) { (data, response, error) in
             if error != nil {
-                print(error!.localizedDescription)
+                DispatchQueue.main.async {
+                    self.loadError(error:error!.localizedDescription)
+                }
+                
             }
             
             guard let data = data else { return }
@@ -130,37 +173,53 @@ class toobViewController: NSViewController, WKUIDelegate  {
             
             }.resume()
         
-        
-        
-        
-        
-        
-        
     }
     
-    override func viewDidLayout() {
+    func loadError(error: String){
+        if let url = Bundle.main.url(forResource: "oops", withExtension: "html") {
+            
+            let theRequest = URLRequest(url: url)
+            self.webView.load(theRequest)
+            self.connectionError = error
+            webView.addObserver(self, forKeyPath: #keyPath(WKWebView.estimatedProgress), options: .new, context: nil)
+        }
         
-        let area = NSTrackingArea.init(rect: button.frame,
-                                       options: [.mouseEnteredAndExited, .activeAlways],
-                                       owner: self,
-                                       userInfo: nil)
         
-        print(area)
-        button.addTrackingArea(area)
+        
         
     }
     
     
     func loadVideoWith(videoId: String){
         let theURL = URL(string:"https://www.youtube-nocookie.com/embed/\(videoId)?rel=0&controls=0&modestbranding=1&iv_load_policy=3")
-        print(theURL)
-        let myRequest = URLRequest(url: theURL!)
-        self.webView.load(myRequest)
+        let theRequest = URLRequest(url: theURL!)
+        self.webView.load(theRequest)
     }
     
     @objc func quit(){
         NSApplication.shared.terminate(self)
     }
+    
+    
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        if keyPath == "estimatedProgress" {
+            if (webView.estimatedProgress == 1.0){ self.webView.evaluateJavaScript("document.body.getElementsByClassName('error')[0].innerHTML = '\(self.connectionError!)'", completionHandler: nil)
+        }
+    }
+    }
+    
+    // MARK: - WKScriptMessageHandler
+    
+    func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
+        if message.name == "retryAction" {
+            print("JavaScript is sending a message \(message.body)")
+            getLatestLiveVid()
+        }
+    }
+    
+    
+    
+    
     
 }
 
