@@ -144,7 +144,12 @@ class toobViewController: NSViewController, WKUIDelegate,WKScriptMessageHandler 
         URLSession.shared.dataTask(with: url) { (data, response, error) in
             if error != nil {
                 DispatchQueue.main.async {
-                    self.loadError(error:error!.localizedDescription)
+                    var err = error!.localizedDescription
+                    if ((error as! NSError).code == -1009){
+                        
+                        err = "No Internet :-("
+                    }
+                    self.loadError(error:err)
                 }
                 
             }

@@ -8,7 +8,7 @@
     {
       "size" : "16x16",
       "idiom" : "mac",
-      "filename" : "StatusBarButtonImage@2x.png",
+      "filename" : "rey32.png",
       "scale" : "2x"
     },
     {
@@ -19,29 +19,30 @@
     {
       "size" : "32x32",
       "idiom" : "mac",
-      "filename" : "StatusBarButtonImage@2x-1.png",
+      "filename" : "rey64.png",
       "scale" : "2x"
     },
     {
-      "idiom" : "mac",
       "size" : "128x128",
+      "idiom" : "mac",
+      "filename" : "rey128.png",
       "scale" : "1x"
     },
     {
       "size" : "128x128",
       "idiom" : "mac",
-      "filename" : "StatusBarButtonImage@2x-2.png",
+      "filename" : "rey256.png",
       "scale" : "2x"
     },
     {
-      "idiom" : "mac",
       "size" : "256x256",
+      "idiom" : "mac",
+      "filename" : "rey256-1.png",
       "scale" : "1x"
     },
     {
-      "size" : "256x256",
       "idiom" : "mac",
-      "filename" : "StatusBarButtonImage@2x-3.png",
+      "size" : "256x256",
       "scale" : "2x"
     },
     {
@@ -50,9 +51,8 @@
       "scale" : "1x"
     },
     {
-      "size" : "512x512",
       "idiom" : "mac",
-      "filename" : "StatusBarButtonImage@2x-4.png",
+      "size" : "512x512",
       "scale" : "2x"
     }
   ],

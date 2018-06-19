@@ -1,0 +1,28 @@
+body {
+    background-color:hotpink;
+}
+h2 {
+    color:white;
+}
+
+button {
+    font-size: 1em;
+    padding: 0.5em;
+    size: 1em;
+    background-color: white;
+    color: hotpink;
+    padding: 0.5em;
+    size: 1em;
+    border: none;
+    border-radius: 2px;
+    display: inline-block;
+    height: 36px;
+    line-height: 36px;
+    padding: 0 16px;
+    text-transform: uppercase;
+    
+}
+
+button:hover {
+    background-color: lightpink;
+}

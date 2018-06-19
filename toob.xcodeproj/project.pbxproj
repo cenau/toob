@@ -15,6 +15,7 @@
 		625CDF9120D87B1D00571914 /* toobWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625CDF9020D87B1D00571914 /* toobWebView.swift */; };
 		625CDF9520D9001B00571914 /* keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 625CDF9420D9001B00571914 /* keys.plist */; };
 		629BC5D820D94FC100DA17C0 /* oops.html in Resources */ = {isa = PBXBuildFile; fileRef = 629BC5D720D94FC100DA17C0 /* oops.html */; };
+		629BC5DA20D964F000DA17C0 /* style.css in Resources */ = {isa = PBXBuildFile; fileRef = 629BC5D920D964F000DA17C0 /* style.css */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +30,7 @@
 		625CDF9020D87B1D00571914 /* toobWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = toobWebView.swift; sourceTree = "<group>"; };
 		625CDF9420D9001B00571914 /* keys.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = keys.plist; sourceTree = "<group>"; };
 		629BC5D720D94FC100DA17C0 /* oops.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = oops.html; sourceTree = "<group>"; };
+		629BC5D920D964F000DA17C0 /* style.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = style.css; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +70,7 @@
 				621B40A220D40B0B00CBC5EC /* toobViewController.swift */,
 				625CDF8E20D87A3A00571914 /* toobView.swift */,
 				629BC5D720D94FC100DA17C0 /* oops.html */,
+				629BC5D920D964F000DA17C0 /* style.css */,
 				625CDF9020D87B1D00571914 /* toobWebView.swift */,
 				621B409B20D4098300CBC5EC /* Info.plist */,
 				621B409C20D4098300CBC5EC /* toob.entitlements */,
@@ -136,6 +139,7 @@
 			files = (
 				621B409720D4098300CBC5EC /* Assets.xcassets in Resources */,
 				629BC5D820D94FC100DA17C0 /* oops.html in Resources */,
+				629BC5DA20D964F000DA17C0 /* style.css in Resources */,
 				621B409A20D4098300CBC5EC /* Main.storyboard in Resources */,
 				625CDF9520D9001B00571914 /* keys.plist in Resources */,
 			);

@@ -2,20 +2,22 @@
 <html lang=en>
     <head>
         <meta charset=utf-8>
-            <script type="text/javascript">
-                function sendRetryAction() {
-                    try {
-                        webkit.messageHandlers.retryAction.postMessage("retry");
-                    } catch(err) {
-                        console.log('The native context does not exist yet');
-                    }
-                }
-            </script>
             <title>Oops</title>
+            <link rel="stylesheet" type="text/css" href="style.css">
+                
+                <script type="text/javascript">
+                    function sendRetryAction() {
+                        try {
+                            webkit.messageHandlers.retryAction.postMessage("retry");
+                        } catch(err) {
+                            console.log('The native context does not exist yet');
+                        }
+                    }
+                </script>
     </head>
     <body>
         <h2 class="error">Didnt work.</h2>
-        <button onClick="sendRetryAction()">retry</button>
+        <button onClick="sendRetryAction()">Retry</button>
     </body>
 </html>
 
