@@ -105,6 +105,7 @@ class toobViewController: NSViewController, WKUIDelegate,WKScriptMessageHandler 
             
         button.attributedTitle = NSMutableAttributedString(string: " Quit Toob", attributes: [NSAttributedStringKey.foregroundColor: NSColor.black, NSAttributedStringKey.font: NSFont.systemFont(ofSize: 14)])
         }
+        getLatestLiveVid()
         
     }
     
@@ -168,7 +169,10 @@ class toobViewController: NSViewController, WKUIDelegate,WKScriptMessageHandler 
                 
                 
                 DispatchQueue.main.async {
+                    if (self.latest != vidId){
                     self.loadVideoWith(videoId:vidId)
+                        self.latest = vidId
+                    }
                 }
                 
             } catch let jsonError {
